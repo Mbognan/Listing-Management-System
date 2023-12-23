@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>General Dashboard &mdash; Stisla</title>
+  <title>General Dashboard</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -48,11 +48,13 @@
   <!-- JS Libraies -->
 
   <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
-
+  <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 
 
   <!-- Template JS File -->
   <script src="{{ asset('admin/assets/js/scripts.js')}}"></script>
   <script src="{{ asset('admin/assets/js/custom.js')}}"></script>
+
+  @stack('scripts')
 </body>
 </html>

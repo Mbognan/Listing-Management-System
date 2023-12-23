@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->enum('user_type',['user','admin'])->default('user');
             $table->string('avatar')->default('/default/avatar.png');
+            $table->string('breadcroumb')->default('/default/breadcroumb_bg.jpg');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->text('about')->nullable();
+            $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('user_type',['user','admin'])->default('user');
+            $table->text('website')->nullable();
+            $table->text('fb_link')->nullable();
+            $table->text('insta_link')->nullable();
+            $table->text('x_link')->nullable();
+            $table->text('git_link')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
