@@ -1,3 +1,4 @@
+
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
@@ -159,10 +160,13 @@
 
 
 
-                <a href="{{ route('logout') }}"     onclick="event.preventDefault();
-                this.closest('form').submit();" class="dropdown-item has-icon text-danger">
+                <a href="{{ route('logout') }}"
+                 onclick="event.preventDefault();
+                this.closest('form').submit();"
+                class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
+                </form>
             </div>
         </li>
     </ul>

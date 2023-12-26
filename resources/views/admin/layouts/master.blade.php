@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/fontawesome/css/all.min.css') }}">
 
   <!-- CSS Libraries -->
-
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
 
   <!-- Template CSS -->
@@ -49,12 +49,21 @@
 
   <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
   <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <!-- Template JS File -->
   <script src="{{ asset('admin/assets/js/scripts.js')}}"></script>
   <script src="{{ asset('admin/assets/js/custom.js')}}"></script>
 
+  <script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        toastr.error("{{$error}}")
+        @endforeach
+
+
+    @endif
+  </script>
   @stack('scripts')
 </body>
 </html>
