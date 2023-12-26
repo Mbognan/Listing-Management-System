@@ -19,7 +19,6 @@ Route::group([
     /**Profile Route */
     Route::get('/profile', [ProfileControllerAdmin::class,'index'])->name('profile');
     Route::put('/profile-update', [ProfileControllerAdmin::class,'updateAdmin'])->name('profile.update');
-
     Route::put('/profile-password', [ProfileControllerAdmin::class,'resetPassword'])->name('update.password');
 
 });

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Frontend\DasboardController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin/login',[AdminController::class,'login'])->name('admin.auth.login');
-
-Route::get('admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard')->middleware('user.type:admin');
-
-
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -34,4 +27,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], function(){
+    Route::get('/dashboard', [DasboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard-profile', [FrontendProfileController::class, 'index'])->name('profile.index');
+    Route::put('/dashboard-profile-update', [FrontendProfileController::class, 'update'])->name('profile.update');
+    Route::put('/dashboard-password', [FrontendProfileController::class, 'resetPassword'])->name('profile-password.reset');
+
+
+});
 require __DIR__.'/auth.php';
