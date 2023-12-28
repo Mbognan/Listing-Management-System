@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.auth.login')->middleware('guest');
@@ -26,5 +27,8 @@ Route::group([
 
     Route::get('/her0', [HeroController::class, 'index'])->name('hero.index');
     Route::put('/hero-update', [HeroController::class, 'update'])->name('hero.update');
+
+    /** Category route */
+    Route::resource('/category', CategoryController::class);
 
 });
