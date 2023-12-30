@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Models\Amenity;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login',[AdminController::class,'login'])->name('admin.auth.login')->middleware('guest');
@@ -30,5 +33,9 @@ Route::group([
 
     /** Category route */
     Route::resource('/category', CategoryController::class);
+    /** Location route */
+    Route::resource('/location', LocationController::class);
+    /** Amenity route */
+    Route::resource('/amenity', AmenityController::class);
 
 });
