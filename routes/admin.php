@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ListingController;
 use App\Models\Amenity;
 use Illuminate\Support\Facades\Route;
 
@@ -37,5 +38,9 @@ Route::group([
     Route::resource('/location', LocationController::class);
     /** Amenity route */
     Route::resource('/amenity', AmenityController::class);
+
+    /** Listing route */
+
+    Route::resource('/listing', ListingController::class);
 
 });

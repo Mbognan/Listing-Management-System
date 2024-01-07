@@ -39,7 +39,10 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Name<span class="text-danger">*</span></label>
-                            <input id="name" type="text" name="name" class="form-control">
+                            <input id="name" type="text" name="name" class="form-control" >
+                            <div class="invalid-feedback">
+                                What's your name?
+                              </div>
                         </div>
                         <div class="form-group">
                             <label for="name">Status<span class="text-danger">*</span></label>
