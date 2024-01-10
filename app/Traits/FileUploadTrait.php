@@ -23,6 +23,27 @@ trait FileUploadTrait {
         }
         return null;
     }
+
+    public function uploadImageMultiple(Request $request, ?string $inputName, string $path ='/uploads' ): ?array{
+        if($request->hasFile($inputName)){
+           $images = $request->{$inputName};
+
+           $paths = [];
+
+           foreach($images as $image){
+            $ext = $image->getClientOriginalExtension();
+             $imageName = 'media_' . uniqid().'.' . $ext;
+
+             $image->move(public_path($path), $imageName);
+
+             $paths[] = $path . '/' . $imageName;
+
+
+            }
+             return $paths;
+        }
+        return null;
+    }
     public function deleteFile($path):void{
         $excludedFolder = '/default';
 

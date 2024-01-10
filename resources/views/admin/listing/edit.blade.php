@@ -45,7 +45,7 @@
                                                 <label for="image-upload-2" id="image-label-2">Choose
                                                     File</label>
                                                 <input type="file" name="thumbnail_image" id="image-upload-2" />
-                                                <input type="hidden" name="old_image" value="{{ $listing->thumbnail_image }}">
+                                                <input type="hidden" name="old_thumbnail" value="{{ $listing->thumbnail_image }}">
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Category</label>
-                                            <select name="category" id="" class="form-control select2" >
+                                            <select name="category" id="categoryId" class="form-control" >
                                                 <option>Select</option>
                                                 @foreach ($categories as $category)
                                                     <option @selected($category->id === $listing->category_id) value="{{ $category->id }}">{{ $category->name }}</option>
@@ -70,12 +70,11 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Location</label>
-                                            <select name="location" id="" class="form-control select2">
+                                            <select name="location" id="locationId" class="form-control">
                                                 <option>Select</option>
                                                 @foreach ($locations as $location)
                                                     <option  @selected($location->id === $listing->location_id) value="{{ $location->id }}">{{ $location->name }}</option>
@@ -135,13 +134,14 @@
 
                                     <div class="col-md-12">
                                         @if($listing->file)
-                                        <div>
+
                                              <i class="fas fa-file-alt" style="font-size:70px"></i>
-                                        </div>
+
                                         @endif
                                         <div class="form-group">
                                             <label for="">Attachment</label>
                                             <input type="file" class="form-control" name="attachment"/>
+                                            <input type="hidden" name="old_attachment" value="{{ $listing->file }}">
                                         </div>
                                     </div>
                                 </div>
@@ -236,6 +236,10 @@
         $(document).ready(function() {
             $('.select2').select2().val(listingAmenities).trigger('change');
         });
+        $(document).ready(function() {
+        $('.categoryId').select2();
+        $('.locationId').select2();
+    });
         $.uploadPreview({
             input_field: "#image-upload-2", // Default: .image-upload
             preview_box: "#image-preview-2", // Default: .image-preview

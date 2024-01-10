@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\ListingImageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ListingController;
+use App\Http\Controllers\Admin\ListingVideoController;
 use App\Models\Amenity;
 use Illuminate\Support\Facades\Route;
 
@@ -42,5 +44,8 @@ Route::group([
     /** Listing route */
 
     Route::resource('/listing', ListingController::class);
-
+    /**ListingGallery */
+    Route::resource('/listing-gallery', ListingImageController::class);
+    /**listing VideoGallery route */
+    Route::resource('/listing-video', ListingVideoController::class);
 });
