@@ -24,7 +24,7 @@
                     <div class="card-header">
                         <h4 class="text-primary" >All Listings Scedule</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('admin.listing-scedule.create',request()->id) }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
+                            <a href="{{ route('admin.listing-scedule.create',$listingId) }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
                         </div>
                     </div>
                     <div class="card-body">

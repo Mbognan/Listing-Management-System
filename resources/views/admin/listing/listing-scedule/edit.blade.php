@@ -10,7 +10,7 @@
             <h1>Update Scedule</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard.index') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.listing.index') }}">Scedule</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.listing.index',$scedule->id) }}">Scedule</a></div>
                 <div class="breadcrumb-item">Update Scedule Section</div>
             </div>
         </div>

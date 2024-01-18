@@ -51,7 +51,7 @@ Route::group([
     /**listing VideoGallery route */
     Route::resource('/listing-video', ListingVideoController::class);
     /**listing scedule-route */
-    Route::get('/listing-scedule', [ListingScheduleController::class, 'index'])->name('listing-scedule.index');
+    Route::get('/listing-scedule/{listing_id}', [ListingScheduleController::class, 'index'])->name('listing-scedule.index');
     Route::get('/listing-scedule/{listing_id}/create', [ListingScheduleController::class, 'create'])->name('listing-scedule.create');
     Route::post('/listing-scedule/send/{listing_id}', [ListingScheduleController::class, 'store'])->name('listing-scedule.store');
     Route::get('/listing-scedule/edit/{id}', [ListingScheduleController::class, 'edit'])->name('listing-scedule.edit');

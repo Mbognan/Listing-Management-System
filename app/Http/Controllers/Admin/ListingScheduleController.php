@@ -16,10 +16,11 @@ use Response;
 
 class ListingScheduleController extends Controller
 {
-    public function index(ListingScheduleDataTable $dataTable  ):View|JsonResponse
+    public function index(ListingScheduleDataTable $dataTable, string $listingId  ):View|JsonResponse
     {
+        $dataTable->with('listingId',$listingId);
 
-        return $dataTable->render('admin.listing.listing-scedule.index');
+        return $dataTable->render('admin.listing.listing-scedule.index',compact('listingId'));
     }
 
     public function create(Request $request, string $listingId):View
@@ -39,7 +40,7 @@ class ListingScheduleController extends Controller
         $listing_schedule->save();
 
         toastr()->success('Schedule Set Successfully!');
-        return to_route('admin.listing-scedule.index', ['id' => $listingId]);
+        return to_route('admin.listing-scedule.index',  $listingId);
 
     }
 
@@ -56,7 +57,7 @@ class ListingScheduleController extends Controller
         $schedule->status = $request->status;
         $schedule->save();
         toastr()->success('Schedule Updated Successfully!');
-        return to_route('admin.listing-scedule.index',['id' => $schedule->id]);
+        return to_route('admin.listing-scedule.index', $schedule->id);
 
     }
 
