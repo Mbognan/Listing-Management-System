@@ -36,6 +36,26 @@ class ListingDataTable extends DataTable
                     return '<span class="badge badge-danger">Inactive</span>';
                 }
             })
+            ->addColumn('is_featured', function($query){
+                if($query->is_featured === 1){
+                    return '<span class="badge badge-primary">Yes</span>';
+                }else{
+                    return '<span class="badge badge-danger">No</span>';
+                }
+            })
+            ->addColumn('is_verified', function($query){
+                if($query->is_verified === 1){
+                    return '<span class="badge badge-primary">Yes</span>';
+                }else{
+                    return '<span class="badge badge-danger">No</span>';
+                }
+            })
+            ->addColumn('image', function($query){
+                return '<img width="60px" src=" '.asset($query->image).' "> ';
+            })
+            ->addColumn('by', function($query){
+                return $query->user?->name;
+            })
             ->addColumn('action', function($query){
                 $edit = '<a href="'.route('admin.listing.edit',$query->id).'" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>';
                 $delete = '<a href="'.route('admin.listing.destroy',$query->id).'" class="delete-item btn btn-sm btn-danger ml-2"><i class="fas fa-trash"></i></a>';
@@ -51,7 +71,7 @@ class ListingDataTable extends DataTable
               </div>';
                 return $edit.$delete.$dropdown;
             })
-            ->rawColumns(['status','action'])
+            ->rawColumns(['status','action','is_featured','is_verified','image'])
             ->setRowId('id');
     }
 
@@ -93,14 +113,18 @@ class ListingDataTable extends DataTable
         return [
 
             Column::make('id'),
+            Column::make('image'),
             Column::make('title'),
             Column::make('category'),
             Column::make('location'),
             Column::make('status'),
+            Column::make('is_featured')->width(80),
+            Column::make('is_verified')->width(80),
+            Column::make('by')->width(80),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(200)
+            ->width(160)
             ->addClass('text-center'),
         ];
     }

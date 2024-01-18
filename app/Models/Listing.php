@@ -16,4 +16,7 @@ class Listing extends Model
     function location():BelongsTo{
         return $this->belongsTo(Location::class);
     }
+    function user():BelongsTo{
+        return $this->belongsto(User::class);
+    }
 }

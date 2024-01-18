@@ -6,7 +6,7 @@
 <section class="section">
     <div class="section-header">
         <div class="section-header-back">
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="{{ route('admin.listing.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
         </div>
         <h1>Listings Scedule</h1>
         <div class="section-header-breadcrumb">
@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="text-primary" >All Listings Scedule</h4>
+                        <h4 class="text-primary" >All Listings Scedule ( {{ $listingTitle->title }} )</h4>
                         <div class="card-header-action">
                             <a href="{{ route('admin.listing-scedule.create',$listingId) }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create</a>
                         </div>
