@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ListingImageController;
+
+use App\Http\Controllers\Admin\ListingScheduleController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
 use App\Http\Controllers\Admin\CategoryController;
@@ -48,4 +50,11 @@ Route::group([
     Route::resource('/listing-gallery', ListingImageController::class);
     /**listing VideoGallery route */
     Route::resource('/listing-video', ListingVideoController::class);
+    /**listing scedule-route */
+    Route::get('/listing-scedule', [ListingScheduleController::class, 'index'])->name('listing-scedule.index');
+    Route::get('/listing-scedule/{listing_id}/create', [ListingScheduleController::class, 'create'])->name('listing-scedule.create');
+    Route::post('/listing-scedule/send/{listing_id}', [ListingScheduleController::class, 'store'])->name('listing-scedule.store');
+    Route::get('/listing-scedule/edit/{id}', [ListingScheduleController::class, 'edit'])->name('listing-scedule.edit');
+    Route::put('/listing-scedule/{id}', [ListingScheduleController::class, 'update'])->name('listing-scedule.update');
+    Route::delete('/listing-scedule/{id}', [ListingScheduleController::class, 'destroy'])->name('listing-scedule.destroy');
 });
