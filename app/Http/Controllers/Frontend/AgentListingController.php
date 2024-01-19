@@ -1,50 +1,50 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
-use App\DataTables\ListingDataTable;
+use App\DataTables\AgentListingDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ListingStoreRequest;
+
+use App\Http\Requests\Frontend\AgentListingStoreRequest;
 use App\Models\Amenity;
 use App\Models\Category;
 use App\Models\Listing;
-use App\Models\ListingAmenities;
 use App\Models\ListingAmenity;
 use App\Models\Location;
 use App\Traits\FileUploadTrait;
 use Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Str;
 
-class ListingController extends Controller
+class AgentListingController extends Controller
 {
-
     use FileUploadTrait;
     /**
      * Display a listing of the resource.
      */
-    public function index(ListingDataTable $datatable): View | JsonResponse
+    public function index(AgentListingDataTable $datatable):View | JsonResponse
     {
-        return $datatable->render('admin.listing.index');
+        return $datatable->render('frontend.dashboard.listing.index') ;
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create():View
     {
         $categories = Category::all();
+
         $locations = Location::all();
         $amenities = Amenity::all();
-        return view('admin.listing.create', compact('categories','locations','amenities'));
+        return view('frontend.dashboard.listing.create',compact('locations', 'amenities','categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ListingStoreRequest $request)
+    public function store(AgentListingStoreRequest $request)
     {
         $imagePath = $this->uploadImage($request,'image');
         $thumbnail_path = $this->uploadImage($request, 'thumbnail_image');
@@ -90,8 +90,6 @@ class ListingController extends Controller
 
         return to_route('user.listing.index');
 
-
-
     }
 
     /**
@@ -105,29 +103,33 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id):View
+    public function edit(string $id)
     {
-        $listing = Listing::findOrFail($id);
+         $listing = Listing::findOrFail($id);
+
+        if(Auth::user()->id !== $listing->user_id){
+           return abort(403);
+        }
         $listingAmenities = ListingAmenity::where('listing_id', $listing->id)->pluck('amenity_id')->toArray();
         $categories = Category::all();
         $locations = Location::all();
         $amenities = Amenity::all();
 
-        return view('admin.listing.edit',compact('categories', 'locations', 'amenities','listing','listingAmenities'));
+        return view('frontend.dashboard..listing.edit',compact('categories', 'locations', 'amenities','listing','listingAmenities'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AgentListingStoreRequest $request, string $id)
     {
-
         $imagePath = $this->uploadImage($request,'image',$request->old_image);
         $thumbnail_path = $this->uploadImage($request, 'thumbnail_image',$request->old_thumbnail);
         $attachment_path = $this->uploadImage($request,'attachment',$request->old_attachment);
 
         $listing = Listing::findOrFail($id);
-        $listing->user_id = Auth::user()->id;
+
         $listing->package_id = 0;
         $listing->image = !empty($imagePath) ? $imagePath :$request->old_image;
         $listing->thumbnail_image = !empty($thumbnail_path) ? $thumbnail_path :$request->old_thumbnail;
@@ -168,7 +170,7 @@ class ListingController extends Controller
 
         toastr()->success('Listing Updated successfully!');
 
-        return to_route('admin.listing.index');
+        return to_route('user.listing.index');
     }
 
     /**
@@ -176,13 +178,6 @@ class ListingController extends Controller
      */
     public function destroy(string $id)
     {
-        try{
-            Listing::findOrFail($id)->delete();
-
-            return response(['status' => 'success', 'message' => 'Deleted Successfully']);
-        }catch(\Exception $e){
-            logger($e);
-            return response(['status' => 'error', 'message' => $e->getMessage()]);
-        }
+        //
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\DasboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController;
@@ -33,7 +33,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     Route::get('/dashboard-profile', [FrontendProfileController::class, 'index'])->name('profile.index');
     Route::put('/dashboard-profile-update', [FrontendProfileController::class, 'update'])->name('profile.update');
     Route::put('/dashboard-password', [FrontendProfileController::class, 'resetPassword'])->name('profile-password.reset');
-
+    /**listing route */
+    Route::resource('/listing', AgentListingController::class);
 
 });
+
+
 require __DIR__.'/auth.php';
