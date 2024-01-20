@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\AgentListing;
 use App\Models\Listing;
+use App\Traits\FileUploadTrait;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -15,6 +16,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class AgentListingDataTable extends DataTable
 {
+    use FileUploadTrait;
     /**
      * Build the DataTable class.
      *
@@ -69,9 +71,9 @@ class AgentListingDataTable extends DataTable
           <i class="fas fa-cog"></i>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="'.route('user.listing-image.index',['id'=> $query->id]).'">Image Gallery</a></li>
+            <li><a class="dropdown-item" href="#">Video Gallery</a></li>
+            <li><a class="dropdown-item" href="#">Scedule</a></li>
           </ul>
         </div>';
             return $edit.$delete.$dropdown;
