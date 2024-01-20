@@ -25,8 +25,8 @@ class AgentListingStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['image','required','max:3000'],
-            'thumbnail_image' => ['image','required','max:3000'],
+            'image' => ['image','max:3000'],
+            'thumbnail_image' => ['image','max:3000'],
             'title' => ['max:255','required','string','unique:listings,title'],
             'category' => ['max:255','required','integer'],
             'location' => ['max:255','required','integer'],

@@ -122,7 +122,7 @@ class AgentListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AgentListingStoreRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $imagePath = $this->uploadImage($request,'image',$request->old_image);
         $thumbnail_path = $this->uploadImage($request, 'thumbnail_image',$request->old_thumbnail);

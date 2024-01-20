@@ -72,7 +72,7 @@ class AgentListingDataTable extends DataTable
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="'.route('user.listing-image.index',['id'=> $query->id]).'">Image Gallery</a></li>
-            <li><a class="dropdown-item" href="#">Video Gallery</a></li>
+            <li><a class="dropdown-item" href="'.route('user.listing-video.index',['id'=> $query->id]).'">Video Gallery</a></li>
             <li><a class="dropdown-item" href="#">Scedule</a></li>
           </ul>
         </div>';

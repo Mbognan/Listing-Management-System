@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingImageController;
+use App\Http\Controllers\Frontend\AgentListingVideoController;
 use App\Http\Controllers\Frontend\DasboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController;
@@ -38,6 +39,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     Route::resource('/listing', AgentListingController::class);
     /**image gallery */
     Route::resource('/listing-image', AgentListingImageController::class);
+    /*video gallery */
+    Route::resource('/listing-video', AgentListingVideoController::class);
 });
 
 
