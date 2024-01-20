@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\AgentListing;
 use App\Models\Listing;
 use App\Traits\FileUploadTrait;
+use Auth;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -73,7 +74,7 @@ class AgentListingDataTable extends DataTable
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="'.route('user.listing-image.index',['id'=> $query->id]).'">Image Gallery</a></li>
             <li><a class="dropdown-item" href="'.route('user.listing-video.index',['id'=> $query->id]).'">Video Gallery</a></li>
-            <li><a class="dropdown-item" href="#">Scedule</a></li>
+            <li><a class="dropdown-item" href="'.route('user.listing-scedule.index',$query->id).'">Scedule</a></li>
           </ul>
         </div>';
             return $edit.$delete.$dropdown;
@@ -88,7 +89,7 @@ class AgentListingDataTable extends DataTable
      */
     public function query(Listing $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('user_id', Auth::user()->id)->newQuery();
     }
 
     /**

@@ -1,42 +1,35 @@
-@extends('admin.layouts.master')
-
-
+@extends('frontend.layouts.master')
+@push('styles')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        label {
+            margin-top: 15px;
+        }
+    </style>
+@endpush
 @section('contents')
-    <section class="section">
-        <div class="section-header">
-            <div class="section-header-back">
-                <a href="{{ route('admin.listing-scedule.index', $listingId) }}" class="btn btn-icon"><i
-                        class="fas fa-arrow-left"></i></a>
-            </div>
-            <h1>Create Scedule</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard.index') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.listing-scedule.index', $listingId) }}">Scedule</a>
-                </div>
-                <div class="breadcrumb-item">Create Scedule Section</div>
-            </div>
-        </div>
-
-        <div class="section-body">
-
+    <section id="dashboard">
+        <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-primary">Scedule Section</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="{{ route('admin.listing-scedule.store', $listingId) }}" method="POST"
+                <div class="col-lg-3">
+                    @include('frontend.dashboard.sidebar')
+                </div>
+                <div class="col-lg-9">
+                    <div class="dashboard_content">
+                        <div class="my_listing">
+                            <h4> <a href="{{ route('user.listing-scedule.index',$scedule->id) }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a> Update Schedule ({{ $scedule->day }})   </h4>
+                            <form action="{{ route('user.listing-scedule.update', $scedule->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-
+                                @method('PUT')
 
                                 <div class="form-group">
                                     <label for="name">Day<span class="text-danger">*</span></label>
                                     <select name="day" id="" class="form-control selectric">
                                         <option value="">Choose</option>
                                         @foreach (config('schedule.days') as $day)
-                                            <option value="{{ $day }}">{{ $day }}</option>
+                                            <option @selected($day === $scedule->day) value="{{ $day }}">
+                                                {{ $day }}</option>
                                         @endforeach
 
 
@@ -45,14 +38,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="name">Opening Time<span class="text-danger">*</span></label>
-                                        <input name="start_time" type="text" class="form-control timepicker">
+                                        <input name="start_time" type="text" class="form-control timepicker-1">
 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
 
                                             <label for="name">Closing Time<span class="text-danger">*</span></label>
-                                            <input name="end_time" type="text" class="form-control timepicker">
+                                            <input name="end_time" type="text" class="form-control timepicker-2">
                                         </div>
                                     </div>
                                 </div>
@@ -61,8 +54,8 @@
                                 <div class="form-group">
                                     <label for="name">Status<span class="text-danger">*</span></label>
                                     <select name="status" id="" class="form-control selectric">
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                        <option @selected($scedule->status === 1) value="1">Active</option>
+                                        <option @selected($scedule->status === 0) value="0">Inactive</option>
                                     </select>
                                 </div>
 
@@ -71,29 +64,42 @@
 
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="read_btn mt-4">Update</button>
 
                                 </div>
 
                             </form>
-
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-
-
     </section>
 @endsection
+
 @push('scripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
-        $('.timepicker').timepicker({
+
+            $('.timepicker-1').timepicker({
+                timeFormat: 'h:mm p',
+                interval: 60,
+                minTime: '10',
+                maxTime: '6:00pm',
+                defaultTime: '{{ $scedule->start_time }}',
+                startTime: '10:00',
+                dynamic: true,
+                dropdown: true,
+                scrollbar: true
+            });
+        $('.timepicker-2').timepicker({
             timeFormat: 'h:mm p',
             interval: 60,
             minTime: '10',
             maxTime: '6:00pm',
-            defaultTime: '11',
+            defaultTime: '{{ $scedule->end_time }}',
             startTime: '10:00',
             dynamic: true,
             dropdown: true,
