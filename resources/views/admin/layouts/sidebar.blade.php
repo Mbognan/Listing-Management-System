@@ -215,6 +215,7 @@
                     <li class="{{ setSidebarActive(['admin.location.*']) }}"><a class="nav-link" href="{{ route('admin.location.index') }}">Location</a></li>
                     <li class="{{ setSidebarActive(['admin.amenity.*']) }}"><a class="nav-link" href="{{ route('admin.amenity.index') }}">Amenities</a></li>
                     <li class="{{ setSidebarActive(['admin.listing.*']) }}"><a class="nav-link" href="{{ route('admin.listing.index') }}"> All Listings</a></li>
+                    <li class="{{ setSidebarActive(['admin.pending.*']) }}"><a class="nav-link" href="{{ route('admin.pending.index') }}"> Pending Listing</a></li>
 
                 </ul>
             </li>

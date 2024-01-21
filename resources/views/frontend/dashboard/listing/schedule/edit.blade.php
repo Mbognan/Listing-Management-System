@@ -17,7 +17,7 @@
                 <div class="col-lg-9">
                     <div class="dashboard_content">
                         <div class="my_listing">
-                            <h4> <a href="{{ route('user.listing-scedule.index',$scedule->id) }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a> Update Schedule ({{ $scedule->day }})   </h4>
+                            <h4> Update Schedule ({{ $scedule->day }})   </h4>
                             <form action="{{ route('user.listing-scedule.update', $scedule->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf

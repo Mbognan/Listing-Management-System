@@ -12,6 +12,7 @@
       <li><a href="dsahboard_package.html"><i class="fal fa-gift-card"></i> Package</a></li>
       <li><a href="dsahboard_message.html"><i class="far fa-comments-alt"></i> Message</a></li>
       <li><a href={{ route('user.profile.index') }}><i class="far fa-user"></i> My Profile</a></li>
+
       <li>
 
       <!-- Authentication -->

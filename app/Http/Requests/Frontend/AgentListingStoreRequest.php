@@ -11,11 +11,11 @@ class AgentListingStoreRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        $listing =  Listing::select('user_id')->where('id', $this->listing)->first();
-        return Auth::user()->id === $listing->user_id;
-    }
+    // public function authorize(): bool
+    // {
+    //     $listing =  Listing::select('user_id')->where('id', $this->listing)->first();
+    //     return Auth::user()->id === $listing->user_id;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -25,8 +25,8 @@ class AgentListingStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['image','max:3000'],
-            'thumbnail_image' => ['image','max:3000'],
+            'image' => ['image','required','max:3000'],
+            'thumbnail_image' => ['image','required','max:3000'],
             'title' => ['max:255','required','string','unique:listings,title'],
             'category' => ['max:255','required','integer'],
             'location' => ['max:255','required','integer'],

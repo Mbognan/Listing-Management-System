@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProfileController as ProfileControllerAdmin;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListingVideoController;
+use App\Http\Controllers\Admin\PendingListingController;
 use App\Models\Amenity;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,8 @@ Route::group([
     /** Listing route */
 
     Route::resource('/listing', ListingController::class);
+    /**pending route */
+    Route::get('/listing-pending',[ PendingListingController::class, 'index'])->name('pending.index');
     /**ListingGallery */
     Route::resource('/listing-gallery', ListingImageController::class);
     /**listing VideoGallery route */

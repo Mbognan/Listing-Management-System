@@ -6,30 +6,45 @@ use App\DataTables\AgentListingScheduleDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Listing;
 use App\Models\ListingSchedule;
+use Auth;
 use Http;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\View\View;
+use Response;
 
 class AgentListingSceduleController extends Controller
 {
     public function index(AgentListingScheduleDataTable $dataTable, string $listingId  ):View | JsonResponse
     {
+        $listing = Listing::select('id','title','user_id')->where('id', $listingId)->first();
+        if($listing->user_id !== Auth::user()->id){
+            abort(403);
+        }
+        $listingTitle = $listing;
         $dataTable->with('listingId',$listingId);
-        $listingTitle = Listing::select('title')->where('id', $listingId)->first();
+
 
         return $dataTable->render('frontend.dashboard.listing.schedule.index',compact('listingId','listingTitle'));
     }
 
     public function create(Request $request, string $listingId):View
     {
-        $listingTitle = Listing::select('title')->where('id', $request->id)->first();
-
-        return view('frontend.dashboard.listing.schedule.create',compact('listingId','listingTitle'));
+        $listing = Listing::select('id','title','user_id')->where('id', $listingId)->first();
+        if($listing->user_id !== Auth::user()->id){
+            abort(403);
+        }
+        $listingTitle = $listing;
+        return view('frontend.dashboard.listing.schedule.create',compact('listingId'));
     }
     public function store(Request $request , string $listingId): RedirectResponse{
+
+        $listing = Listing::select('id','title','user_id')->where('id', $listingId)->first();
+        if($listing->user_id !== Auth::user()->id){
+            abort(403);
+        }
 
         $listing_schedule = new ListingSchedule();
 
@@ -47,6 +62,10 @@ class AgentListingSceduleController extends Controller
 
     function edit(string $id):View{
         $scedule = ListingSchedule::findOrFail($id);
+        $listing = Listing::select('id','title','user_id')->where('id', $scedule->listing_id)->first();
+        if($listing->user_id !== Auth::user()->id){
+            abort(403);
+        }
         return view('frontend.dashboard.listing.schedule.edit',compact('scedule'));
     }
     public  function update(Request $request , string $id):RedirectResponse{
@@ -62,7 +81,7 @@ class AgentListingSceduleController extends Controller
 
     }
 
-    public function destroy(string $id): Response{
+    public function destroy(string $id): HttpResponse{
         try{
             ListingSchedule::findOrFail($id)->delete();
 
