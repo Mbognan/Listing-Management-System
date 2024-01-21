@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\AgentListingController;
 use App\Http\Controllers\Frontend\AgentListingImageController;
+use App\Http\Controllers\Frontend\AgentListingSceduleController;
 use App\Http\Controllers\Frontend\AgentListingVideoController;
 use App\Http\Controllers\Frontend\DasboardController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -41,6 +42,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], func
     Route::resource('/listing-image', AgentListingImageController::class);
     /*video gallery */
     Route::resource('/listing-video', AgentListingVideoController::class);
+     /**listing scedule-route */
+     Route::get('/listing-scedule/{listing_id}', [AgentListingSceduleController::class, 'index'])->name('listing-scedule.index');
+     Route::get('/listing-scedule/{listing_id}/create', [AgentListingSceduleController::class, 'create'])->name('listing-scedule.create');
+     Route::post('/listing-scedule/send/{listing_id}', [AgentListingSceduleController::class, 'store'])->name('listing-scedule.store');
+     Route::get('/listing-scedule/edit/{id}', [AgentListingSceduleController::class, 'edit'])->name('listing-scedule.edit');
+     Route::put('/listing-scedule/{id}', [AgentListingSceduleController::class, 'update'])->name('listing-scedule.update');
+     Route::delete('/listing-scedule/{id}', [AgentListingSceduleController::class, 'destroy'])->name('listing-scedule.destroy');
 });
 
 
