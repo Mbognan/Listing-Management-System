@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('listing', [FrontendController::class, 'listings'])->name('listings');
 
 
 Route::middleware('auth')->group(function () {

@@ -88,7 +88,7 @@ class ListingController extends Controller
 
         toastr()->success('Listing added successfully!');
 
-        return to_route('user.listing.index');
+        return to_route('admin.listing.index');
 
 
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('listing_amenities', function (Blueprint $table) {
             $table->id();
             $table->foreignID('listing_id')->constrained('listings')->onDelete('cascade');
-            $table->foreignId('amenity_id')->constrained('amenities');
+            $table->foreignId('amenity_id'); //delete if categpry not working
             $table->timestamps();
         });
     }

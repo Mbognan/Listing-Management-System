@@ -6,7 +6,7 @@
                 <div class="col-xl-6 col-lg-7">
                     <div class="wsus__banner_text">
                         <h1>{!! @$hero->title !!}</h1>
-                        <p>{!! @$hero->subtitle !!}/p>
+                        <p>{!! @$hero->subtitle !!}</p>
                     </div>
                 </div>
 
