@@ -26,3 +26,13 @@ if(!function_exists('getYtThumbnail')){
     }
 }
 
+/** Title truncate */
+
+if(!function_exists('truncate')){
+    function truncate(string $text, int $limit = 25):?string {
+
+        return \Str::of($text)->limit($limit);
+    }
+}
+
+

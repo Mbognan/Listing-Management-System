@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
                 'password'=> bcrypt('password'),
                 'user_type' => 'admin',
             ]
-        ]);
+            ]);
     }
 }

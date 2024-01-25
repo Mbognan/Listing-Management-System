@@ -29,4 +29,10 @@ class FrontendController extends Controller
 
         return view('frontend.pages.listings',compact('listings'));
     }
+
+    function listingModal(string $id){
+        $listing =Listing::findOrFail($id);
+
+        return view('frontend.layouts.listing-modal', compact('listing'))->render();
+    }
 }
