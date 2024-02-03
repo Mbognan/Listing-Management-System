@@ -245,24 +245,30 @@
                                         @if ($listing->fb_link)
                                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                         @endif
-
+                                        @if ($listing->x_link)
                                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                                        @endif
+                                        @if ($listing->insta_link)
+                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        @endif
+                                        @if ($listing->insta_link)
+                                        <li><a href="#"><i class="fab fa-github"></i></a></li>
+                                        @endif
+
+
+
+
+
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="listing_det_side_open_hour">
                                     <h5>Opening Hours</h5>
-                                    <p>Saturday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Sunday <span>Close</span></p>
-                                    <p>Monday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Yuesday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Wednesday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Thursday <span>10:00 AM - 06:00 PM</span></p>
-                                    <p>Friday <span>10:00 AM - 06:00 PM</span></p>
+                                    @foreach ($listing->schedule as $schedule )
+                                    <p>{{ $schedule->day }} <span>{{ $schedule->start_time }} - {{ $schedule->end_time }}</span></p>
+                                    @endforeach
+
                                 </div>
                             </div>
                             <div class="col-12">
@@ -278,29 +284,26 @@
                                         </form>
                                 </div>
                             </div>
+                            @if(count($similarListings) > 0)
                             <div class="col-12">
                                 <div class="listing_det_side_list">
                                     <h5>Similar Listing</h5>
-                                    <a href="#" class="sidebar_blog_single">
+                                    @foreach ($similarListings as $similarListing )
+                                    <a href="{{ route('listing.show',$similarListing->slug) }}" class="sidebar_blog_single">
                                         <div class="sidebar_blog_img">
-                                            <img src="images/location_1.jpg" alt="blog" class="imgofluid w-100">
+                                            <img src="{{ asset($similarListing->image) }}" alt="{{ $similarListing->title }}" class="imgofluid w-100">
                                         </div>
                                         <div class="sidebar_blog_text">
-                                            <h5>One Thing Separates Creators From Consumers</h5>
-                                            <p> <span>Jul 29 2021 </span> 2 Comment </p>
+                                            <h5>{{ truncate($similarListing->title, 40) }}</h5>
+                                            <p> <span>{{ date('m d Y',strtotime($similarListing->created_at)) }}</span> 2 Comment </p>
                                         </div>
                                     </a>
-                                    <a href="#" class="sidebar_blog_single">
-                                        <div class="sidebar_blog_img">
-                                            <img src="images/location_1.jpg" alt="blog" class="imgofluid w-100">
-                                        </div>
-                                        <div class="sidebar_blog_text">
-                                            <h5>One Thing Separates Creators From Consumers</h5>
-                                            <p> <span>Jul 29 2021 </span> 2 Comment </p>
-                                        </div>
-                                    </a>
+                                    @endforeach
+
                                 </div>
                             </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
